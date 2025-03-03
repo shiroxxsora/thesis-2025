@@ -1,2 +1,2 @@
-# diplom-2025
-CNN diplom work
+# Thesis-2025
+CNN thesis
