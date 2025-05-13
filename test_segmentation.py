@@ -8,11 +8,12 @@ import os
 
 def setup_cfg():
     cfg = get_cfg()
-    cfg.merge_from_file("detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
-    #cfg.merge_from_file("detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml")
+    #cfg.merge_from_file("detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")
+    cfg.merge_from_file("detectron2/configs/COCO-InstanceSegmentation/mask_rcnn_R_101_FPN_3x.yaml")
     cfg.MODEL.WEIGHTS = "output_maskrcnn_r101/model_final.pth"
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # порог уверенности для предсказаний
+    cfg.MODEL.DEVICE = "cpu"
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.55  # порог уверенности для предсказаний
     return cfg
 
 def test_segmentation(image_path, output_path):
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     os.makedirs("test_results", exist_ok=True)
     
     # Тестируем на изображении из валидационного набора
-    test_image = "Dataset/Alexander/Снимок13.JPG"
+    test_image = "Combined_Dataset/images/Tenzin (2)_16.png"
     output_path = "test_results/result.jpg"
     
     instances = test_segmentation(test_image, output_path)

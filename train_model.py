@@ -15,6 +15,7 @@ from detectron2.engine import DefaultTrainer, DefaultPredictor
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 from detectron2.data import detection_utils as utils
 from detectron2.data import transforms as T
+from detectron2.data import build_detection_test_loader
 from detectron2.structures import BoxMode
 import pycocotools.mask as mask_util # Необходим для COCOEvaluator
 

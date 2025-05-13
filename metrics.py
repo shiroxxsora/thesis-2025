@@ -2,8 +2,6 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Настройка стиля графиков (используем доступный стиль)
-plt.style.use('seaborn-v0_8')  # Альтернативы: 'ggplot', 'seaborn', 'seaborn-darkgrid'
 plt.rcParams['figure.figsize'] = (14, 8)
 
 # Чтение данных
@@ -20,12 +18,13 @@ plt.plot(df['iteration'], df['loss_box_reg'], 'g--', label='Box Regression Loss'
 plt.plot(df['iteration'], df['loss_mask'], 'm--', label='Mask Loss')
 plt.plot(df['iteration'], df['loss_rpn_cls'], 'c--', label='RPN Class Loss')
 plt.plot(df['iteration'], df['loss_rpn_loc'], 'y--', label='RPN Loc Loss')
-plt.xlabel('Iteration', fontsize=12)
-plt.ylabel('Loss Value', fontsize=12)
-plt.title('Training Losses Over Iterations', fontsize=14)
+plt.xlabel('Итерация', fontsize=12)
+plt.ylabel('Значение потери', fontsize=12)
+plt.title('Потери по итерациям', fontsize=14)
 plt.legend(fontsize=10, bbox_to_anchor=(1.05, 1))
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
+plt.savefig('plot1.png')
 plt.show()
 
 # 2. График точности (Accuracy)
@@ -33,13 +32,14 @@ plt.figure()
 plt.plot(df['iteration'], df['fast_rcnn/cls_accuracy'], 'b-', label='Cls Accuracy')
 plt.plot(df['iteration'], df['fast_rcnn/fg_cls_accuracy'], 'r-', label='FG Cls Accuracy')
 plt.plot(df['iteration'], df['mask_rcnn/accuracy'], 'g-', label='Mask Accuracy')
-plt.xlabel('Iteration', fontsize=12)
-plt.ylabel('Accuracy', fontsize=12)
-plt.title('Accuracy Metrics Over Iterations', fontsize=14)
+plt.xlabel('Итерация', fontsize=12)
+plt.ylabel('Точность', fontsize=12)
+plt.title('Точность по итерациям', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(True, alpha=0.3)
 plt.ylim(0, 1)
 plt.tight_layout()
+plt.savefig('plot2.png')
 plt.show()
 
 # 3. График ложных срабатываний
@@ -47,12 +47,13 @@ plt.figure()
 plt.plot(df['iteration'], df['fast_rcnn/false_negative'], 'b-', label='Fast RCNN FN')
 plt.plot(df['iteration'], df['mask_rcnn/false_negative'], 'r-', label='Mask RCNN FN')
 plt.plot(df['iteration'], df['mask_rcnn/false_positive'], 'g-', label='Mask RCNN FP')
-plt.xlabel('Iteration', fontsize=12)
-plt.ylabel('Rate', fontsize=12)
-plt.title('False Positive/Negative Rates', fontsize=14)
+plt.xlabel('Итерация', fontsize=12)
+plt.ylabel('Частота', fontsize=12)
+plt.title('Частота ложно позитивных/негативных срабатываний', fontsize=14)
 plt.legend(fontsize=10)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
+plt.savefig('plot3.png')
 plt.show()
 
 # 4. График анкеров и learning rate
@@ -75,4 +76,5 @@ ax2.set_title('Learning Rate Schedule')
 ax2.grid(True, alpha=0.3)
 
 plt.tight_layout()
+plt.savefig('plot4.png')
 plt.show()
